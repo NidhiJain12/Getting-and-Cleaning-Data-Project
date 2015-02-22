@@ -1,0 +1,259 @@
+---
+title: "CodeBook - Course Project for Getting and Cleaning Data (Coursera)"
+output: html_document
+---
+
+1.RAW Data from UCI Machine Learning Repository
+---
+> **Description:**
+
+This project uses the raw dataset of Human Activity Recognition using Smartphone. The Human Activity Recognition database is built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors.
+
+The full description of the dataset can be found at [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+> **Data Set Information:**
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
+
+> **Attribute Information:**
+
+For each record in the dataset it is provided: 
+
+* **Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration**
+  
+    
+        +  Training Set
+    
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+       train/Inertial Signals/total_acc_x_train.txt | 'g'   | 128 element vector|Total Acceleration - X Axis
+       train/Inertial Signals/total_acc_y_train.txt | 'g'   | 128 element vector|Total Acceleration - Y Axis
+       train/Inertial Signals/total_acc_z_train.txt | 'g'   | 128 element vector|Total Acceleration - Z Axis
+       train/Inertial Signals/body_acc_x_train.txt | 'g'   | 128 element vector|Body Acceleration - X Axis
+       train/Inertial Signals/body_acc_y_train.txt | 'g'   | 128 element vector|Body Acceleration - Y Axis
+       train/Inertial Signals/body_acc_z_train.txt | 'g'   | 128 element vector|Body Acceleration - Z Axis
+      
+        +  Test Set
+    
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+       test/Inertial Signals/total_acc_x_test.txt | 'g'   | 128 element vector|Total Acceleration - X Axis
+       test/Inertial Signals/total_acc_y_test.txt | 'g'   | 128 element vector|Total Acceleration - Y Axis
+       test/Inertial Signals/total_acc_z_test.txt | 'g'   | 128 element vector|Total Acceleration - Z Axis
+       test/Inertial Signals/body_acc_x_test.txt | 'g'   | 128 element vector|Body Acceleration - X Axis
+       test/Inertial Signals/body_acc_y_test.txt | 'g'   | 128 element vector|Body Acceleration - Y Axis
+       test/Inertial Signals/body_acc_z_test.txt | 'g'   | 128 element vector|Body Acceleration - Z Axis
+
+
+* **Triaxial Angular velocity from the gyroscope** 
+
+        + Training Dataset
+       
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+       train/Inertial Signals/body_gyro_x_train.txt |radians/second| 128 element vector|Angular Velocity - X Axis
+       train/Inertial Signals/body_gyro_y_train.txt |radians/second| 128 element vector|Angular Velocity  - Y Axis
+       train/Inertial Signals/body_gyro_z_train.txt |radians/second| 128 element vector|Angular Velocity  - Z Axis
+       
+         + Test Dataset
+       
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+      test/Inertial Signals/body_gyro_x_test.txt | radians/second| 128 element vector|Angular Velocity - X Axis
+      test/Inertial Signals/body_gyro_y_test.txt |radians/second| 128 element vector|Angular Velocity  - Y Axis
+      test/Inertial Signals/body_gyro_z_test.txt |radians/second| 128 element vector|Angular Velocity  - Z Axis
+
+
+* **A 561-feature vector with time and frequency domain variables**
+
+        +  Training Dataset
+       
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+       train/X_train.txt |time/frequency| 561 element vector|Training Set (561 features - measures)
+       train/Y_train.txt |time/frequency| 561 element vector|Training Labels (walking activity for each sample)
+       
+        +  Test Dataset
+       
+       Raw File                                     | units | type/length       | Description
+       ---------------------------------------------|-------|-------------------|----------------
+       test/X_test.txt |time/frequency| 561 element vector|Training Set (561 features - measures)
+       test/Y_test.txt |time/frequency| 561 element vector|Training Labels (walking activity for each sample)
+       
+* **Activity label**
+
+      + 
+        
+        Raw File                                    | units | type/length(per record)| Description
+        --------------------------------------------|-------|------------------------|----------------
+      activity_labels.txt                           |       | 2 elements (ID and ActivityName) |Links the class labels with their activity name.
+      
+* **An identifier of the subject who carried out the experiment**
+
+      + Training Dataset
+        
+        Raw File                                    | units | type/length| Description
+        --------------------------------------------|-------|------------------------|----------------
+      train/subject_train.txt.txt                   |       | number - range(1-30) |Each row identifies the subject who performed the activity for each window sample.
+
+
+       + Test Dataset
+        
+        Raw File                                    | units | type/length| Description
+        --------------------------------------------|-------|------------------------|----------------
+      test/subject_test.txt.txt                   |       | number - range(1-30) |Each row identifies the subject who performed the activity for each window sample.
+      
+2. Tidy Data Output
+---
+> **Description:**
+
+The tidy dataset contains the average of feature variable (Mean and Standard Deviation measures only) from the original dataset for each activity and each subject.
+
+
+> **Tidy Dataset Information**
+
+*  The tidy dataset is consistent of 68 variables which includes ActivityName, SubjectID and 66 Mean value of feature variable (Mean and Standard deviation measures only). 
+
+*  The Mean of feature variable is calculated for each subject ID and for each activity
+
+*  There are 180 observations in the tidy dataset, (6 activities x 30 subjects)
+
+*  The data is produced in a wide form
+
+*   
+        
+        Field/Attribute                   | units | type/length             | Description
+        ----------------------------------|-------|------------------------ |----------------
+        SubjectId                         |       | int - range(1-30)       |Identifies the subject who performed the activity.
+        ActivityName                      |       | character -             |Name of the activity
+                                          |       |       values            |
+                                          |       |        ("LAYING",       |
+                                          |       |        "SITTING",       |    
+                                          |       |        "STANDING",      |
+                                          |       |        "WALKING",       |
+                                          |       |    "WALKING_DOWNSTAIRS",| 
+                                          |       |      "WALKING_UPSTAIRS) |
+          66 Mean values of feature       |       |                         |
+          variables                       |       |                         |
+        (ex- tBodyAcc-mean()-X.MEAN,      |       |                         |
+        tBodyAcc-mean()-Y.MEAN and so on) |       |  number                 |    
+
+> **Tidy Dataset Attributes**
+
+More details of the tidy datset attributes are below:
+
+```{r}
+tidy <- read.table("./tidy_data.txt", stringsAsFactor=FALSE, header=TRUE)
+str(tidy)
+```
+
+3.Transformation (from RAW to Tidy Data)
+---
+
+> **Assumptions:**
+
+  *  While reading at UCI webpage, it appears that the intention is to use data to see patterns of 
+     different measures / variables. Doing analysis / looking at patterns of different variable would 
+     be easier using wide - form instead of skinny/narrow format. Therefore, my output is in wide form.
+        Although, I believe both forms represent tidy data.
+        
+  *  I have assumed that only valid values are where measure names contain either 
+           mean() or std(). I have excluded any other means such as FreqMean or angle mean.      
+
+> **Steps:**
+
+1. **Merges the training and the test sets to create one data set.**
+
+          A. Load the Datasets
+              i). As there are different datasets file for training data and test data, all the files      
+              are first loaded into separate dataframe variables. The data from training and test 
+              datasets will be merged later.
+              
+              ii). Loaded the datafiles into following dataframe/vectors.
+                Variable                          | Filename          | dimension
+                ----------------------------------|-------------------|-------
+                features (Data Frame)             |  features.txt    | 561x2
+                activity (Data Frame)             |  activity.txt     | 6x2
+                x_test (Data Frame)               |  X_test.txt       | 2947x561
+                y_test (Data Frame)               |  Y_test.txt       | 2947x1
+                subject_test (Data Frame)         |  subject_test.txt | 2947x1
+                x_train (Data Frame)              |  X_train.txt      | 7352x561
+                y_train (Data Frame)              |  Y_train.txt      | 7352x1
+                subject_train (Data Frame)        |  subject_train.txt| 7352x1
+                
+              iii). There is no need to load/read the datasets for Inertia Signals (accelerometer,      
+                angular velocity) as later in the project these will be dropped. They do not represent 
+                mean / standard deviation values. Project only asks to prepare tidy dataset for mean
+                /standard deviation variables.  
+                
+               iv) Provide appropriate/descriptive column names for each of the retrieved dataset.  
+                
+          B. Concatenate the three data frames for training data together to form one frame. That is,     
+              we have merged - subject IDs, Activity IDs and feature data for every record (row) in the   
+              datafiles. 
+              
+              The function used is "cbind". 
+              train_merge_data <- cbind(subject_train, y_train, x_train)
+ 
+          C. Similarly produce one data frame for test dataset. 
+              test_merge_data <- cbind(subject_test, y_test, x_test)
+              
+            
+          D. Merge the test and train datasets. These needs to be merged horizentally. Use row bind     
+             function "rbind".
+              merge_data <- rbind(train_merge_data, test_merge_data)
+              
+      
+2. **Extracts only the measurements on the mean and standard deviation for each measurement.** 
+
+          A. Extract only those measures from the merged data frame which represents mean or standard    
+           deviation.
+          
+          B. Assumption: I have assumed that only valid values are where measure names contain either 
+           mean() or std(). I have excluded any other means such as FreqMean or angle mean.
+           
+          C. Use grep command to extract the measures that matched mean() or std().
+            Sample - 
+            grep("mean\\(\\)|std\\(\\)", colNames, ignore=TRUE)
+            
+          D. The grep will provide the indices of the columns whose names match the selection 
+          criteria.
+          
+          E. Extract all the valid columns in a dataframe using cbind. The data frame contains 
+           subjectId, activityId and 66 columns (measures) that met the selection criteria. Use cbind()  
+          function. Call this dataset "out_data"
+            
+          
+3. **Uses descriptive activity names to name the activities in the data set**
+
+
+          A. Join dataset in previous step ("out_data") with the "activity" data frame based on 
+          activityID field. "activity" dataset contains descriptive names of all the activities.
+          
+          B. Assign the result to out_data. This will now contain activityName in addition to the 68  
+          columns.
+          
+4. **Appropriately labels the data set with descriptive variable names.** 
+
+          A.  Label all the columns extracted from the datafiles in the dataframe appropriately. Give 
+          them a descriptive name such as "activityName", "activityId", and so on. I have provided the 
+          appropriate names when the data was loaded from files. Feature names are extracted from 
+          "feature.txt" file and assigned as column names for the measure variables in test/train 
+          datasets.
+          
+5. **From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
+
+
+          A. Calculate the aggregated mean of all the 66 measures for each subject for each activity. 
+          Used "ddply"" function for calculating the summary. As the tidy data will be presented in 
+          wide-form (and Not Skinny form), there are large number of columns.
+                 Therefore I will be using "numcolwise"" function to calculate mean of all rows without 
+          the need for typing all columns.
+          
+          Sample:- tidy_data <- ddply(out_data,.(subjectId,activityName), numcolwise(mean, na.rm=TRUE))
+
+          B. Remove the "activity ID" column as we have activityName (descriptive)
+          
+          C. Change the column names of the measures by append ".MEAN" to the original name at the end
